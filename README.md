@@ -31,6 +31,18 @@ flowchart TD
 
 ---
 
+## Application Screenshots
+
+| Property Input Form | Real-Time Form Validation |
+| :---: | :---: |
+| ![Main Property Input Form](docs/screenshots/home.png) | ![Validation Error State](docs/screenshots/validation.png) |
+
+| Staged Valuation Result | FastAPI OpenAPI / Swagger Docs |
+| :---: | :---: |
+| ![Prediction Result View](docs/screenshots/result.png) | ![FastAPI Interactive Swagger UI](docs/screenshots/api-swagger.png) |
+
+---
+
 ## What the Application Does
 
 PropValuate AI computes market valuations for residential properties through an automated end-to-end flow:
@@ -76,13 +88,28 @@ CATEGORICAL_FEATURES = [
 
 ---
 
-## Dataset & Preprocessing
+## Dataset Source & Setup Instructions
 
-- **Source:** Kaggle Indian Housing Price Dataset (`notebooks/data/house_prices.csv`, 187,531 raw listings).
+### Dataset Attribution
+- **Dataset Name:** Kaggle Indian Housing Prices Dataset (`house_prices.csv`)
+- **Dataset Source URL:** [Indian Housing Prices Dataset on Kaggle](https://www.kaggle.com/datasets/anubhavk/indian-housing-prices-dataset)
+- **Raw Volume:** 187,531 raw property listings spanning 81 major Indian metropolitan markets and growth corridors.
+- **Local Storage Path:** `notebooks/data/house_prices.csv`
+
+### Developer Setup & Download Instructions
+1. **Download Dataset:** Download `house_prices.csv` directly from [Kaggle](https://www.kaggle.com/datasets/anubhavk/indian-housing-prices-dataset).
+2. **Directory Placement:** Create the local directory `notebooks/data/` if it does not already exist and place the downloaded CSV file at:
+   ```
+   notebooks/data/house_prices.csv
+   ```
+3. **Repository Exclusion Note:** Due to file size constraints (~106 MB), `notebooks/data/house_prices.csv` is intentionally excluded from the Git repository via `.gitignore` (`notebooks/data/*.csv`). The serialized trained model pipeline (`backend/models/house_price.pkl`) and verified locations metadata (`backend/models/locations.json`) are committed to the repository, enabling full backend API and frontend operation without re-running model training.
+4. **Pipeline Execution:** To re-train the model pipeline from raw data, execute `notebooks/house_price_model.ipynb` from start to finish.
+
+### Preprocessing & Filtering Summary
 - **Deduplication:** Substantive duplicate removal reduced raw records from 187,531 to 167,485 unique properties.
 - **Area Normalization:** Handled multi-unit real-estate area formats (`sqft`, `sqyrd` $\times 9.0$, `sqm` $\times 10.7639$, `acre` $\times 43,560$, `marla` $\times 225.0$) into unified `area_sqft`.
 - **Domain Bounds Filtering:** Filtered listings to typical residential ranges ($100 \le \text{area\_sqft} \le 15,000$, $₹2\text{L} \le \text{price\_inr} \le ₹30\text{Cr}$, $1 \le \text{BHK} \le 10$, $1 \le \text{Bathrooms} \le 10$), retaining 151,847 clean samples.
-- **Train/Test Split:** 80/20 train/test split with `random_state=42` ($N_{\text{train}} = 121,477$, $N_{\text{test}} = 30,370$).
+- **Train/Test Split:** Leakage-free 80/20 train/test split with `random_state=42` ($N_{\text{train}} = 121,477$, $N_{\text{test}} = 30,370$).
 
 ---
 
@@ -305,6 +332,27 @@ Accept: application/json
 ```
 
 ### 3. Predict House Price (`POST /predict`)
+
+#### Production `curl` Request Example
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "area_sqft": 1500.0,
+    "bhk": 3,
+    "bathroom": 2.0,
+    "balcony": 2.0,
+    "floor_num": 4.0,
+    "total_floors": 10.0,
+    "location": "bangalore",
+    "Furnishing": "Semi-Furnished",
+    "Transaction": "Resale",
+    "facing": "East",
+    "Ownership": "Freehold"
+  }'
+```
+
+#### HTTP Request Format
 ```http
 POST /predict HTTP/1.1
 Host: localhost:8000
@@ -324,7 +372,8 @@ Content-Type: application/json
   "Ownership": "Freehold"
 }
 ```
-**Response (`200 OK`):**
+
+#### Representative Response Format (`200 OK`)
 ```json
 {
   "predicted_price": 12465981.21,
