@@ -2,12 +2,15 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { PredictionForm } from '../components/PredictionForm';
 import { Sparkles, MapPin, Zap, ShieldCheck } from 'lucide-react';
-import { PredictionRequest } from '../types/prediction';
+import { PredictionRequest, PredictionRequestV2 } from '../types/prediction';
 
 export const HomePage: React.FC = () => {
   const location = useLocation();
   // If navigated back with existing form inputs, prefill them
   const initialValues = (location.state as { editValues?: PredictionRequest })?.editValues;
+  const initialV2Values = (location.state as { editValuesV2?: PredictionRequestV2 })?.editValuesV2;
+  const defaultMode = initialV2Values ? 'v2' : initialValues ? 'v1' : 'v2';
+
 
   return (
     <div className="space-y-10 sm:space-y-12 animate-fade-in-up">
@@ -29,7 +32,7 @@ export const HomePage: React.FC = () => {
 
       {/* Main Interactive Form Card */}
       <div className="max-w-4xl mx-auto">
-        <PredictionForm initialValues={initialValues} />
+        <PredictionForm initialValues={initialValues} initialV2Values={initialV2Values} defaultMode={defaultMode as 'v1' | 'v2'} />
       </div>
 
       {/* Feature / Trust Badges */}

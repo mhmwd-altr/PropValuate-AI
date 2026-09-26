@@ -64,6 +64,8 @@ export const ResultPage: React.FC = () => {
   }
 
   const { inputs, result, timestamp } = state;
+  const resultV2 = state.resultV2;
+  const isV2 = Boolean(resultV2);
   const denomination = formatIndianDenomination(result.predicted_price);
   const pricePerSqft =
     inputs.area_sqft > 0
@@ -71,8 +73,13 @@ export const ResultPage: React.FC = () => {
       : 0;
 
   const handleEditDetails = () => {
-    navigate('/', { state: { editValues: inputs } });
+    if (isV2 && state.inputsV2) {
+      navigate('/', { state: { editValuesV2: state.inputsV2 } });
+    } else {
+      navigate('/', { state: { editValues: inputs } });
+    }
   };
+
 
   const handlePredictNew = () => {
     navigate('/');
@@ -146,7 +153,7 @@ Generated: ${new Date(timestamp).toLocaleDateString('en-IN')}`;
           <div>
             <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/30 text-emerald-300 text-xs font-semibold uppercase tracking-wider mb-4">
               <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Machine Learning Valuation</span>
+              <span>{isV2 ? 'Valuation Engine V2' : 'Machine Learning Valuation'}</span>
             </div>
 
             <h2 className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-400 mb-1.5">
@@ -314,15 +321,57 @@ Generated: ${new Date(timestamp).toLocaleDateString('en-IN')}`;
           </div>
         </div>
       </div>
+      {/* V2 Engineered Features Card — shown only for V2 results */}
+      {isV2 && resultV2?.engineered_features && (
+        <div className="stagger-3 bg-indigo-50/60 rounded-2xl p-5 sm:p-6 border border-indigo-100">
+          <div className="flex items-center space-x-2 mb-4">
+            <div className="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-600 flex items-center justify-center">
+              <ShieldCheck className="w-3.5 h-3.5" />
+            </div>
+            <h4 className="text-sm font-bold text-indigo-900">V2 Engineered Features</h4>
+            <span className="text-xs font-medium text-indigo-500 bg-indigo-100 px-2 py-0.5 rounded-full">
+              {resultV2.model_version}
+            </span>
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">Area per BHK</p>
+              <p className="text-sm font-bold text-slate-800">{resultV2.engineered_features.area_per_bhk.toFixed(1)} sq ft</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">Nearest Metro</p>
+              <p className="text-sm font-bold text-slate-800">{resultV2.engineered_features.dist_nearest_metro_km.toFixed(1)} km</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">City Group</p>
+              <p className="text-sm font-bold text-slate-800 capitalize">{resultV2.engineered_features.city_grouped}</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">From Mumbai</p>
+              <p className="text-sm font-bold text-slate-800">{resultV2.engineered_features.dist_mumbai_km.toFixed(1)} km</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">From Delhi</p>
+              <p className="text-sm font-bold text-slate-800">{resultV2.engineered_features.dist_delhi_km.toFixed(1)} km</p>
+            </div>
+            <div className="p-3 bg-white rounded-xl border border-indigo-100">
+              <p className="text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-1">From Bangalore</p>
+              <p className="text-sm font-bold text-slate-800">{resultV2.engineered_features.dist_bangalore_km.toFixed(1)} km</p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Model Transparency & Methodology Card (Staged Reveal 4) */}
       <div className="stagger-3 bg-slate-100/80 rounded-2xl p-5 border border-slate-200/80 flex items-start space-x-3.5">
         <ShieldCheck className="w-5 h-5 text-slate-500 shrink-0 mt-0.5" />
         <div className="text-xs text-slate-600 leading-relaxed">
           <span className="font-bold text-slate-800">
-            Methodology & Confidence Disclosure:
+            Methodology &amp; Confidence Disclosure:
           </span>{' '}
-          This price estimation is generated algorithmically based on statistical patterns learned from historical residential property transactions. Actual market prices may vary based on exact locality micro-factors, property age, amenity quality, and negotiated terms.
+          {isV2
+            ? `This price estimation was generated by Valuation Engine V2 (${resultV2?.model_name ?? 'HistGradientBoosting'}) using geospatial distance features, city-tier grouping, and structural ratios derived from verified residential transaction data across 81 Indian markets. Actual market prices may vary based on micro-location factors, property age, and negotiated terms.`
+            : 'This price estimation is generated algorithmically based on statistical patterns learned from historical residential property transactions. Actual market prices may vary based on exact locality micro-factors, property age, amenity quality, and negotiated terms.'}
         </div>
       </div>
     </div>
