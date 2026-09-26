@@ -1,0 +1,74 @@
+[
+  {
+    "model": "Ridge Regression",
+    "cv_r2": "0.4632 +/- 0.0594",
+    "cv_mae_lakhs": 48.15,
+    "test_r2": 0.4467,
+    "test_mae_lakhs": 47.3,
+    "test_rmse_lakhs": 111.07,
+    "test_mdape_pct": 43.88,
+    "gen_gap": 0.0111,
+    "geo_unseen_r2": "N/A",
+    "training_time_sec": 0.74
+  },
+  {
+    "model": "Random Forest (100 Trees)",
+    "cv_r2": "0.7294 +/- 0.0592",
+    "cv_mae_lakhs": 25.93,
+    "test_r2": 0.7365,
+    "test_mae_lakhs": 24.53,
+    "test_rmse_lakhs": 76.65,
+    "test_mdape_pct": 16.18,
+    "gen_gap": 0.2051,
+    "geo_unseen_r2": 0.5813,
+    "training_time_sec": 26.45
+  },
+  {
+    "model": "Extra Trees (100 Trees)",
+    "cv_r2": "0.7329 +/- 0.0709",
+    "cv_mae_lakhs": 25.76,
+    "test_r2": 0.7495,
+    "test_mae_lakhs": 24.1,
+    "test_rmse_lakhs": 74.73,
+    "test_mdape_pct": 16.98,
+    "gen_gap": 0.1969,
+    "geo_unseen_r2": 0.339,
+    "training_time_sec": 24.64
+  },
+  {
+    "model": "Gradient Boosting (150 Trees)",
+    "cv_r2": "0.7097 +/- 0.0655",
+    "cv_mae_lakhs": 26.96,
+    "test_r2": 0.7444,
+    "test_mae_lakhs": 25.51,
+    "test_rmse_lakhs": 75.49,
+    "test_mdape_pct": 19.56,
+    "gen_gap": 0.1917,
+    "geo_unseen_r2": "N/A",
+    "training_time_sec": 113.21
+  },
+  {
+    "model": "HistGradientBoosting (Standard)",
+    "cv_r2": "0.7282 +/- 0.0771",
+    "cv_mae_lakhs": 28.71,
+    "test_r2": 0.7155,
+    "test_mae_lakhs": 28.3,
+    "test_rmse_lakhs": 79.65,
+    "test_mdape_pct": 22.25,
+    "gen_gap": 0.0953,
+    "geo_unseen_r2": 0.5437,
+    "training_time_sec": 4.37
+  },
+  {
+    "model": "HistGradientBoosting (Log-Target)",
+    "cv_r2": "0.7515 +/- 0.0745",
+    "cv_mae_lakhs": 24.48,
+    "test_r2": 0.7324,
+    "test_mae_lakhs": 23.61,
+    "test_rmse_lakhs": 77.25,
+    "test_mdape_pct": 16.28,
+    "gen_gap": 0.0738,
+    "geo_unseen_r2": "N/A",
+    "training_time_sec": 15.41
+  }
+]

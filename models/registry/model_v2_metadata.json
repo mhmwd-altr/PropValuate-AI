@@ -1,0 +1,61 @@
+{
+  "model_id": "propvaluate_valuation_v2",
+  "model_version": "2.0.0",
+  "created_at": "2026-09-26T01:06:04Z",
+  "training_dataset": "india_housing_challenge_train.csv",
+  "training_dataset_sha256": "b960388685fd0ce4e1935f4854fdf2256b556b7976b134d82aa4972525faa32b",
+  "total_training_samples": 28590,
+  "train_samples": 22872,
+  "test_samples": 5718,
+  "algorithm": "HistGradientBoostingRegressor",
+  "hyperparameters": {
+    "max_iter": 250,
+    "max_depth": 12,
+    "learning_rate": 0.08,
+    "l2_regularization": 1.0,
+    "random_state": 42
+  },
+  "feature_schema": {
+    "numeric_features": [
+      "area_sqft",
+      "bhk",
+      "is_rk",
+      "rera",
+      "under_construction",
+      "ready_to_move",
+      "resale",
+      "latitude",
+      "longitude",
+      "area_per_bhk",
+      "dist_nearest_metro_km",
+      "dist_mumbai_km",
+      "dist_delhi_km",
+      "dist_bangalore_km"
+    ],
+    "categorical_features": [
+      "posted_by",
+      "city_grouped"
+    ],
+    "total_features": 16
+  },
+  "metrics": {
+    "test_r2": 0.7155,
+    "test_mae_lakhs": 28.3,
+    "test_mae_inr": 2830001.12,
+    "test_rmse_lakhs": 79.65,
+    "test_rmse_inr": 7965306.06,
+    "test_mdape_pct": 22.25,
+    "cv_5fold_r2_mean": 0.7282,
+    "cv_5fold_r2_std": 0.0771,
+    "cv_5fold_mae_lakhs": 28.71,
+    "geo_unseen_r2_mean": 0.5437,
+    "geo_unseen_mae_lakhs": 38.1
+  },
+  "protected_baseline_comparison": {
+    "baseline_r2": 0.757,
+    "baseline_mae_lakhs": 28.08,
+    "baseline_rmse_lakhs": 67.38,
+    "v2_r2_improvement": -0.0415,
+    "v2_mae_improvement_lakhs": -0.22
+  }
+}
