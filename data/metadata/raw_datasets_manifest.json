@@ -1,0 +1,94 @@
+{
+  "india_housing_challenge_train.csv": {
+    "filename": "india_housing_challenge_train.csv",
+    "url": "https://raw.githubusercontent.com/srikanth2102/Predict-the-house-prices-in-India/master/train.csv",
+    "description": "National multi-city property transaction challenge dataset with geo coordinates",
+    "size_bytes": 2480912,
+    "size_kb": 2422.77,
+    "rows": 29451,
+    "columns_count": 12,
+    "columns": [
+      "POSTED_BY",
+      "UNDER_CONSTRUCTION",
+      "RERA",
+      "BHK_NO.",
+      "BHK_OR_RK",
+      "SQUARE_FT",
+      "READY_TO_MOVE",
+      "RESALE",
+      "ADDRESS",
+      "LONGITUDE",
+      "LATITUDE",
+      "TARGET(PRICE_IN_LACS)"
+    ],
+    "sha256": "b960388685fd0ce4e1935f4854fdf2256b556b7976b134d82aa4972525faa32b"
+  },
+  "bengaluru_house_prices.csv": {
+    "filename": "bengaluru_house_prices.csv",
+    "url": "https://raw.githubusercontent.com/codebasics/py/master/DataScience/BangloreHomePrices/model/bengaluru_house_prices.csv",
+    "description": "Bengaluru metro real estate pricing and locality dataset",
+    "size_bytes": 924700,
+    "size_kb": 903.03,
+    "rows": 13320,
+    "columns_count": 9,
+    "columns": [
+      "area_type",
+      "availability",
+      "location",
+      "size",
+      "society",
+      "total_sqft",
+      "bath",
+      "balcony",
+      "price"
+    ],
+    "sha256": "23ddf71be7d79a259b62e125b9d56cb531f9d051b0da650c0fe7cc82365a1015"
+  },
+  "india_house_rent.csv": {
+    "filename": "india_house_rent.csv",
+    "url": "https://raw.githubusercontent.com/Athulyachandran/House-Rent-Dataset-Analysis/main/House_Rent_Dataset.csv",
+    "description": "Rental market listings across 6 Indian Tier-1 metropolitan centers",
+    "size_bytes": 566961,
+    "size_kb": 553.67,
+    "rows": 4746,
+    "columns_count": 12,
+    "columns": [
+      "Posted On",
+      "BHK",
+      "Rent",
+      "Size",
+      "Floor",
+      "Area Type",
+      "Area Locality",
+      "City",
+      "Furnishing Status",
+      "Tenant Preferred",
+      "Bathroom",
+      "Point of Contact"
+    ],
+    "sha256": "ca27105d4a553b76682922f8636581c5fba7a175fbfbaaf909fffd194b0a2b63"
+  },
+  "delhi_magicbricks_flats.csv": {
+    "filename": "delhi_magicbricks_flats.csv",
+    "url": "https://raw.githubusercontent.com/Gaurav-223344/Delhi-House-Price-Prediction/master/MagicBricks.csv",
+    "description": "Delhi NCR micro-market residential flat listings",
+    "size_bytes": 157576,
+    "size_kb": 153.88,
+    "rows": 1259,
+    "columns_count": 11,
+    "columns": [
+      "Area",
+      "BHK",
+      "Bathroom",
+      "Furnishing",
+      "Locality",
+      "Parking",
+      "Price",
+      "Status",
+      "Transaction",
+      "Type",
+      "Per_Sqft"
+    ],
+    "sha256": "99c3b9464b590b8e441cc3132a5013b5e6b23a05b8dd34b2a23977275d946d9b"
+  }
+}

@@ -1,0 +1,1158 @@
+{
+  "india_housing_challenge_train": {
+    "dataset_name": "india_housing_challenge_train",
+    "filepath": "data\\raw\\india_housing_challenge_train.csv",
+    "rows": 29451,
+    "cols": 12,
+    "memory_mb": 7.645,
+    "exact_duplicates": 401,
+    "null_counts": {
+      "POSTED_BY": 0,
+      "UNDER_CONSTRUCTION": 0,
+      "RERA": 0,
+      "BHK_NO.": 0,
+      "BHK_OR_RK": 0,
+      "SQUARE_FT": 0,
+      "READY_TO_MOVE": 0,
+      "RESALE": 0,
+      "ADDRESS": 0,
+      "LONGITUDE": 0,
+      "LATITUDE": 0,
+      "TARGET(PRICE_IN_LACS)": 0
+    },
+    "null_percentages": {
+      "POSTED_BY": 0.0,
+      "UNDER_CONSTRUCTION": 0.0,
+      "RERA": 0.0,
+      "BHK_NO.": 0.0,
+      "BHK_OR_RK": 0.0,
+      "SQUARE_FT": 0.0,
+      "READY_TO_MOVE": 0.0,
+      "RESALE": 0.0,
+      "ADDRESS": 0.0,
+      "LONGITUDE": 0.0,
+      "LATITUDE": 0.0,
+      "TARGET(PRICE_IN_LACS)": 0.0
+    },
+    "numeric_profile": {
+      "UNDER_CONSTRUCTION": {
+        "count": 29451,
+        "mean": 0.18,
+        "std": 0.38,
+        "min": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 0.0,
+        "max": 1.0,
+        "zeros_count": 24157,
+        "negatives_count": 0
+      },
+      "RERA": {
+        "count": 29451,
+        "mean": 0.32,
+        "std": 0.47,
+        "min": 0.0,
+        "p25": 0.0,
+        "median": 0.0,
+        "p75": 1.0,
+        "max": 1.0,
+        "zeros_count": 20088,
+        "negatives_count": 0
+      },
+      "BHK_NO.": {
+        "count": 29451,
+        "mean": 2.39,
+        "std": 0.88,
+        "min": 1.0,
+        "p25": 2.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "max": 20.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "SQUARE_FT": {
+        "count": 29451,
+        "mean": 19802.17,
+        "std": 1901334.91,
+        "min": 3.0,
+        "p25": 900.02,
+        "median": 1175.06,
+        "p75": 1550.69,
+        "max": 254545454.5,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "READY_TO_MOVE": {
+        "count": 29451,
+        "mean": 0.82,
+        "std": 0.38,
+        "min": 0.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 1.0,
+        "max": 1.0,
+        "zeros_count": 5294,
+        "negatives_count": 0
+      },
+      "RESALE": {
+        "count": 29451,
+        "mean": 0.93,
+        "std": 0.26,
+        "min": 0.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 1.0,
+        "max": 1.0,
+        "zeros_count": 2074,
+        "negatives_count": 0
+      },
+      "LONGITUDE": {
+        "count": 29451,
+        "mean": 21.3,
+        "std": 6.21,
+        "min": -37.71,
+        "p25": 18.45,
+        "median": 20.75,
+        "p75": 26.9,
+        "max": 59.91,
+        "zeros_count": 0,
+        "negatives_count": 12
+      },
+      "LATITUDE": {
+        "count": 29451,
+        "mean": 76.84,
+        "std": 10.56,
+        "min": -121.76,
+        "p25": 73.8,
+        "median": 77.32,
+        "p75": 77.83,
+        "max": 152.96,
+        "zeros_count": 0,
+        "negatives_count": 83
+      },
+      "TARGET(PRICE_IN_LACS)": {
+        "count": 29451,
+        "mean": 142.9,
+        "std": 656.88,
+        "min": 0.25,
+        "p25": 38.0,
+        "median": 62.0,
+        "p75": 100.0,
+        "max": 30000.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "target_correlations": {
+        "TARGET(PRICE_IN_LACS)": 1.0,
+        "SQUARE_FT": 0.4027,
+        "BHK_NO.": 0.1123,
+        "RERA": 0.0676,
+        "UNDER_CONSTRUCTION": 0.0554,
+        "LATITUDE": -0.0173,
+        "LONGITUDE": -0.0311,
+        "READY_TO_MOVE": -0.0554,
+        "RESALE": -0.2074
+      }
+    },
+    "categorical_profile": {
+      "POSTED_BY": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Dealer": 18291,
+          "Owner": 10538,
+          "Builder": 622
+        },
+        "sample_values": [
+          "Owner",
+          "Dealer",
+          "Builder"
+        ]
+      },
+      "BHK_OR_RK": {
+        "unique_count": 2,
+        "top_10_values": {
+          "BHK": 29427,
+          "RK": 24
+        },
+        "sample_values": [
+          "BHK",
+          "RK"
+        ]
+      },
+      "ADDRESS": {
+        "unique_count": 6899,
+        "top_10_values": {
+          "Zirakpur,Chandigarh": 509,
+          "Whitefield,Bangalore": 230,
+          "Raj Nagar Extension,Ghaziabad": 215,
+          "Sector-137 Noida,Noida": 139,
+          "New Town,Kolkata": 131,
+          "Jagatpura,Jaipur": 120,
+          "Rajarhat,Kolkata": 113,
+          "Thanisandra,Bangalore": 110,
+          "Noida Extension,Noida": 107,
+          "Baner,Pune": 101
+        },
+        "sample_values": [
+          "Ksfc Layout,Bangalore",
+          "Vishweshwara Nagar,Mysore",
+          "Jigani,Bangalore",
+          "Sector-1 Vaishali,Ghaziabad",
+          "New Town,Kolkata"
+        ]
+      }
+    },
+    "geographic_profile": {
+      "has_geo": true,
+      "total_extracted_cities": 256,
+      "top_15_cities": {
+        "bangalore": 4340,
+        "lalitpur": 2993,
+        "mumbai": 2023,
+        "pune": 1991,
+        "noida": 1767,
+        "kolkata": 1709,
+        "maharashtra": 1579,
+        "chennai": 1255,
+        "ghaziabad": 1087,
+        "jaipur": 962,
+        "chandigarh": 696,
+        "faridabad": 649,
+        "mohali": 556,
+        "vadodara": 510,
+        "gurgaon": 430
+      },
+      "matches_with_81_baseline": 63,
+      "matched_cities_list": [
+        "bangalore",
+        "mumbai",
+        "pune",
+        "noida",
+        "kolkata",
+        "chennai",
+        "ghaziabad",
+        "jaipur",
+        "chandigarh",
+        "faridabad",
+        "mohali",
+        "vadodara",
+        "gurgaon",
+        "surat",
+        "nagpur",
+        "lucknow",
+        "indore",
+        "bhubaneswar",
+        "bhopal",
+        "kochi"
+      ],
+      "potential_new_cities": [
+        "lalitpur",
+        "maharashtra",
+        "gandhinagar",
+        "secunderabad",
+        "rajkot",
+        "jamnagar",
+        "raigad",
+        "dharuhera",
+        "meerut",
+        "bahadurgarh",
+        "anand",
+        "kota",
+        "bharuch",
+        "valsad",
+        "ratnagiri",
+        "bhilai",
+        "jalandhar",
+        "asansol",
+        "neemrana",
+        "kolhapur"
+      ],
+      "coordinates": {
+        "raw_longitude_col_stats": {
+          "min": -37.7130075,
+          "max": 59.912884,
+          "mean": 21.300255165028354
+        },
+        "raw_latitude_col_stats": {
+          "min": -121.7612481,
+          "max": 152.962676,
+          "mean": 76.83769524877074
+        },
+        "critical_finding": "HEADER INVERSION DETECTED: 'LONGITUDE' column contains Indian latitudes (8-37 N), while 'LATITUDE' contains Indian longitudes (68-97 E).",
+        "valid_india_coords_when_corrected_count": 29193,
+        "valid_india_coords_when_corrected_pct": 99.12
+      }
+    },
+    "temporal_profile": {
+      "has_temporal": true,
+      "temporal_column": "POSTED_BY",
+      "sample_values": [
+        "Owner",
+        "Dealer",
+        "Owner",
+        "Owner",
+        "Dealer",
+        "Owner",
+        "Dealer",
+        "Owner",
+        "Dealer",
+        "Owner"
+      ],
+      "unique_values": 3
+    },
+    "leakage_notes": [
+      "CRITICAL DATA ANOMALY: LONGITUDE and LATITUDE column headers are inverted in raw source. Correcting mapping yields 95.8% valid Indian geo-coordinates."
+    ],
+    "sample_rows": [
+      {
+        "POSTED_BY": "Owner",
+        "UNDER_CONSTRUCTION": 0,
+        "RERA": 0,
+        "BHK_NO.": 2,
+        "BHK_OR_RK": "BHK",
+        "SQUARE_FT": 1300.236407,
+        "READY_TO_MOVE": 1,
+        "RESALE": 1,
+        "ADDRESS": "Ksfc Layout,Bangalore",
+        "LONGITUDE": 12.96991,
+        "LATITUDE": 77.59796,
+        "TARGET(PRICE_IN_LACS)": 55.0,
+        "extracted_city": "bangalore"
+      },
+      {
+        "POSTED_BY": "Dealer",
+        "UNDER_CONSTRUCTION": 0,
+        "RERA": 0,
+        "BHK_NO.": 2,
+        "BHK_OR_RK": "BHK",
+        "SQUARE_FT": 1275.0,
+        "READY_TO_MOVE": 1,
+        "RESALE": 1,
+        "ADDRESS": "Vishweshwara Nagar,Mysore",
+        "LONGITUDE": 12.274538,
+        "LATITUDE": 76.644605,
+        "TARGET(PRICE_IN_LACS)": 51.0,
+        "extracted_city": "mysore"
+      },
+      {
+        "POSTED_BY": "Owner",
+        "UNDER_CONSTRUCTION": 0,
+        "RERA": 0,
+        "BHK_NO.": 2,
+        "BHK_OR_RK": "BHK",
+        "SQUARE_FT": 933.1597222,
+        "READY_TO_MOVE": 1,
+        "RESALE": 1,
+        "ADDRESS": "Jigani,Bangalore",
+        "LONGITUDE": 12.778033,
+        "LATITUDE": 77.632191,
+        "TARGET(PRICE_IN_LACS)": 43.0,
+        "extracted_city": "bangalore"
+      }
+    ]
+  },
+  "bengaluru_house_prices": {
+    "dataset_name": "bengaluru_house_prices",
+    "filepath": "data\\raw\\bengaluru_house_prices.csv",
+    "rows": 13320,
+    "cols": 9,
+    "memory_mb": 5.224,
+    "exact_duplicates": 529,
+    "null_counts": {
+      "area_type": 0,
+      "availability": 0,
+      "location": 1,
+      "size": 16,
+      "society": 5502,
+      "total_sqft": 0,
+      "bath": 73,
+      "balcony": 609,
+      "price": 0
+    },
+    "null_percentages": {
+      "area_type": 0.0,
+      "availability": 0.0,
+      "location": 0.01,
+      "size": 0.12,
+      "society": 41.31,
+      "total_sqft": 0.0,
+      "bath": 0.55,
+      "balcony": 4.57,
+      "price": 0.0
+    },
+    "numeric_profile": {
+      "bath": {
+        "count": 13247,
+        "mean": 2.69,
+        "std": 1.34,
+        "min": 1.0,
+        "p25": 2.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "max": 40.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "balcony": {
+        "count": 12711,
+        "mean": 1.58,
+        "std": 0.82,
+        "min": 0.0,
+        "p25": 1.0,
+        "median": 2.0,
+        "p75": 2.0,
+        "max": 3.0,
+        "zeros_count": 1029,
+        "negatives_count": 0
+      },
+      "price": {
+        "count": 13320,
+        "mean": 112.57,
+        "std": 148.97,
+        "min": 8.0,
+        "p25": 50.0,
+        "median": 72.0,
+        "p75": 120.0,
+        "max": 3600.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      }
+    },
+    "categorical_profile": {
+      "area_type": {
+        "unique_count": 4,
+        "top_10_values": {
+          "Super built-up  Area": 8790,
+          "Built-up  Area": 2418,
+          "Plot  Area": 2025,
+          "Carpet  Area": 87
+        },
+        "sample_values": [
+          "Super built-up  Area",
+          "Plot  Area",
+          "Built-up  Area",
+          "Carpet  Area"
+        ]
+      },
+      "availability": {
+        "unique_count": 81,
+        "top_10_values": {
+          "Ready To Move": 10581,
+          "18-Dec": 307,
+          "18-May": 295,
+          "18-Apr": 271,
+          "18-Aug": 200,
+          "19-Dec": 185,
+          "18-Jul": 143,
+          "18-Mar": 131,
+          "18-Jun": 99,
+          "20-Dec": 98
+        },
+        "sample_values": [
+          "19-Dec",
+          "Ready To Move",
+          "18-May",
+          "18-Feb",
+          "18-Nov"
+        ]
+      },
+      "location": {
+        "unique_count": 1305,
+        "top_10_values": {
+          "Whitefield": 540,
+          "Sarjapur  Road": 399,
+          "Electronic City": 302,
+          "Kanakpura Road": 273,
+          "Thanisandra": 234,
+          "Yelahanka": 213,
+          "Uttarahalli": 186,
+          "Hebbal": 177,
+          "Marathahalli": 175,
+          "Raja Rajeshwari Nagar": 171
+        },
+        "sample_values": [
+          "Electronic City Phase II",
+          "Chikka Tirupathi",
+          "Uttarahalli",
+          "Lingadheeranahalli",
+          "Kothanur"
+        ]
+      },
+      "size": {
+        "unique_count": 31,
+        "top_10_values": {
+          "2 BHK": 5199,
+          "3 BHK": 4310,
+          "4 Bedroom": 826,
+          "4 BHK": 591,
+          "3 Bedroom": 547,
+          "1 BHK": 538,
+          "2 Bedroom": 329,
+          "5 Bedroom": 297,
+          "6 Bedroom": 191,
+          "1 Bedroom": 105
+        },
+        "sample_values": [
+          "2 BHK",
+          "4 Bedroom",
+          "3 BHK",
+          "4 BHK",
+          "6 Bedroom"
+        ]
+      },
+      "society": {
+        "unique_count": 2688,
+        "top_10_values": {
+          "GrrvaGr": 80,
+          "PrarePa": 76,
+          "Sryalan": 59,
+          "Prtates": 59,
+          "GMown E": 56,
+          "Bhmesy ": 51,
+          "Prtanha": 51,
+          "Prityel": 50,
+          "Prarkun": 49,
+          "PrityTr": 49
+        },
+        "sample_values": [
+          "Coomee ",
+          "Theanmp",
+          "Soiewre",
+          "DuenaTa",
+          "Jaades "
+        ]
+      },
+      "total_sqft": {
+        "unique_count": 2117,
+        "top_10_values": {
+          "1200": 843,
+          "1100": 221,
+          "1500": 205,
+          "2400": 196,
+          "600": 180,
+          "1000": 172,
+          "1350": 133,
+          "1050": 123,
+          "1300": 117,
+          "1250": 114
+        },
+        "sample_values": [
+          "1056",
+          "2600",
+          "1440",
+          "1521",
+          "1200"
+        ]
+      }
+    },
+    "geographic_profile": {
+      "has_geo": true,
+      "locality_column": "location",
+      "unique_localities": 1295,
+      "top_10_localities": {
+        "whitefield": 540,
+        "sarjapur  road": 399,
+        "electronic city": 302,
+        "kanakpura road": 273,
+        "thanisandra": 234,
+        "yelahanka": 213,
+        "uttarahalli": 186,
+        "hebbal": 177,
+        "marathahalli": 175,
+        "raja rajeshwari nagar": 171
+      }
+    },
+    "temporal_profile": {
+      "has_temporal": false
+    },
+    "leakage_notes": [],
+    "sample_rows": [
+      {
+        "area_type": "Super built-up  Area",
+        "availability": "19-Dec",
+        "location": "Electronic City Phase II",
+        "size": "2 BHK",
+        "society": "Coomee ",
+        "total_sqft": "1056",
+        "bath": 2.0,
+        "balcony": 1.0,
+        "price": 39.07
+      },
+      {
+        "area_type": "Plot  Area",
+        "availability": "Ready To Move",
+        "location": "Chikka Tirupathi",
+        "size": "4 Bedroom",
+        "society": "Theanmp",
+        "total_sqft": "2600",
+        "bath": 5.0,
+        "balcony": 3.0,
+        "price": 120.0
+      },
+      {
+        "area_type": "Built-up  Area",
+        "availability": "Ready To Move",
+        "location": "Uttarahalli",
+        "size": "3 BHK",
+        "society": NaN,
+        "total_sqft": "1440",
+        "bath": 2.0,
+        "balcony": 3.0,
+        "price": 62.0
+      }
+    ]
+  },
+  "india_house_rent": {
+    "dataset_name": "india_house_rent",
+    "filepath": "data\\raw\\india_house_rent.csv",
+    "rows": 4746,
+    "cols": 12,
+    "memory_mb": 2.641,
+    "exact_duplicates": 0,
+    "null_counts": {
+      "Posted On": 0,
+      "BHK": 0,
+      "Rent": 0,
+      "Size": 0,
+      "Floor": 0,
+      "Area Type": 0,
+      "Area Locality": 0,
+      "City": 0,
+      "Furnishing Status": 0,
+      "Tenant Preferred": 0,
+      "Bathroom": 0,
+      "Point of Contact": 0
+    },
+    "null_percentages": {
+      "Posted On": 0.0,
+      "BHK": 0.0,
+      "Rent": 0.0,
+      "Size": 0.0,
+      "Floor": 0.0,
+      "Area Type": 0.0,
+      "Area Locality": 0.0,
+      "City": 0.0,
+      "Furnishing Status": 0.0,
+      "Tenant Preferred": 0.0,
+      "Bathroom": 0.0,
+      "Point of Contact": 0.0
+    },
+    "numeric_profile": {
+      "BHK": {
+        "count": 4746,
+        "mean": 2.08,
+        "std": 0.83,
+        "min": 1.0,
+        "p25": 2.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "max": 6.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Rent": {
+        "count": 4746,
+        "mean": 34993.45,
+        "std": 78106.41,
+        "min": 1200.0,
+        "p25": 10000.0,
+        "median": 16000.0,
+        "p75": 33000.0,
+        "max": 3500000.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Size": {
+        "count": 4746,
+        "mean": 967.49,
+        "std": 634.2,
+        "min": 10.0,
+        "p25": 550.0,
+        "median": 850.0,
+        "p75": 1200.0,
+        "max": 8000.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Bathroom": {
+        "count": 4746,
+        "mean": 1.97,
+        "std": 0.88,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 2.0,
+        "p75": 2.0,
+        "max": 10.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      }
+    },
+    "categorical_profile": {
+      "Posted On": {
+        "unique_count": 81,
+        "top_10_values": {
+          "06-07-2022": 311,
+          "12-05-2022": 149,
+          "04-06-2022": 135,
+          "09-07-2022": 126,
+          "23-05-2022": 125,
+          "27-05-2022": 125,
+          "29-04-2022": 114,
+          "07-07-2022": 112,
+          "20-06-2022": 111,
+          "04-07-2022": 110
+        },
+        "sample_values": [
+          "18-05-2022",
+          "13-05-2022",
+          "16-05-2022",
+          "04-07-2022",
+          "09-05-2022"
+        ]
+      },
+      "Floor": {
+        "unique_count": 480,
+        "top_10_values": {
+          "1 out of 2": 379,
+          "Ground out of 2": 350,
+          "2 out of 3": 312,
+          "2 out of 4": 308,
+          "1 out of 3": 293,
+          "3 out of 4": 239,
+          "Ground out of 3": 209,
+          "1 out of 4": 200,
+          "Ground out of 1": 195,
+          "1 out of 1": 134
+        },
+        "sample_values": [
+          "Ground out of 2",
+          "1 out of 3",
+          "1 out of 2",
+          "Ground out of 1",
+          "Ground out of 4"
+        ]
+      },
+      "Area Type": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Super Area": 2446,
+          "Carpet Area": 2298,
+          "Built Area": 2
+        },
+        "sample_values": [
+          "Super Area",
+          "Carpet Area",
+          "Built Area"
+        ]
+      },
+      "Area Locality": {
+        "unique_count": 2235,
+        "top_10_values": {
+          "Bandra West": 37,
+          "Gachibowli": 29,
+          "Electronic City": 24,
+          "Velachery": 22,
+          "Miyapur, NH 9": 22,
+          "Madipakkam": 20,
+          "Chembur": 19,
+          "K R Puram": 19,
+          "Laxmi Nagar": 19,
+          "Kondapur": 18
+        },
+        "sample_values": [
+          "Bandel",
+          "Phool Bagan, Kankurgachi",
+          "Salt Lake City Sector 2",
+          "Dumdum Park",
+          "South Dum Dum"
+        ]
+      },
+      "City": {
+        "unique_count": 6,
+        "top_10_values": {
+          "Mumbai": 972,
+          "Chennai": 891,
+          "Bangalore": 886,
+          "Hyderabad": 868,
+          "Delhi": 605,
+          "Kolkata": 524
+        },
+        "sample_values": [
+          "Kolkata",
+          "Mumbai",
+          "Bangalore",
+          "Delhi",
+          "Chennai"
+        ]
+      },
+      "Furnishing Status": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Semi-Furnished": 2251,
+          "Unfurnished": 1815,
+          "Furnished": 680
+        },
+        "sample_values": [
+          "Unfurnished",
+          "Semi-Furnished",
+          "Furnished"
+        ]
+      },
+      "Tenant Preferred": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Bachelors/Family": 3444,
+          "Bachelors": 830,
+          "Family": 472
+        },
+        "sample_values": [
+          "Bachelors/Family",
+          "Bachelors",
+          "Family"
+        ]
+      },
+      "Point of Contact": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Contact Owner": 3216,
+          "Contact Agent": 1529,
+          "Contact Builder": 1
+        },
+        "sample_values": [
+          "Contact Owner",
+          "Contact Agent",
+          "Contact Builder"
+        ]
+      }
+    },
+    "geographic_profile": {
+      "has_geo": true,
+      "city_column": "City",
+      "unique_cities": 6,
+      "city_distribution": {
+        "mumbai": 972,
+        "chennai": 891,
+        "bangalore": 886,
+        "hyderabad": 868,
+        "delhi": 605,
+        "kolkata": 524
+      },
+      "matches_with_81_baseline": 5
+    },
+    "temporal_profile": {
+      "has_temporal": true,
+      "temporal_column": "Posted On",
+      "sample_values": [
+        "18-05-2022",
+        "13-05-2022",
+        "16-05-2022",
+        "04-07-2022",
+        "09-05-2022",
+        "29-04-2022",
+        "21-06-2022",
+        "21-06-2022",
+        "07-06-2022",
+        "20-06-2022"
+      ],
+      "unique_values": 81,
+      "earliest_date": "2022-04-13",
+      "latest_date": "2022-07-11",
+      "span_days": 89,
+      "parsed_valid_date_count": 4746,
+      "monthly_distribution": {
+        "2022-06": 1859,
+        "2022-05": 1681,
+        "2022-07": 978,
+        "2022-04": 228
+      }
+    },
+    "leakage_notes": [],
+    "sample_rows": [
+      {
+        "Posted On": "18-05-2022",
+        "BHK": 2,
+        "Rent": 10000,
+        "Size": 1100,
+        "Floor": "Ground out of 2",
+        "Area Type": "Super Area",
+        "Area Locality": "Bandel",
+        "City": "Kolkata",
+        "Furnishing Status": "Unfurnished",
+        "Tenant Preferred": "Bachelors/Family",
+        "Bathroom": 2,
+        "Point of Contact": "Contact Owner"
+      },
+      {
+        "Posted On": "13-05-2022",
+        "BHK": 2,
+        "Rent": 20000,
+        "Size": 800,
+        "Floor": "1 out of 3",
+        "Area Type": "Super Area",
+        "Area Locality": "Phool Bagan, Kankurgachi",
+        "City": "Kolkata",
+        "Furnishing Status": "Semi-Furnished",
+        "Tenant Preferred": "Bachelors/Family",
+        "Bathroom": 1,
+        "Point of Contact": "Contact Owner"
+      },
+      {
+        "Posted On": "16-05-2022",
+        "BHK": 2,
+        "Rent": 17000,
+        "Size": 1000,
+        "Floor": "1 out of 3",
+        "Area Type": "Super Area",
+        "Area Locality": "Salt Lake City Sector 2",
+        "City": "Kolkata",
+        "Furnishing Status": "Semi-Furnished",
+        "Tenant Preferred": "Bachelors/Family",
+        "Bathroom": 1,
+        "Point of Contact": "Contact Owner"
+      }
+    ]
+  },
+  "delhi_magicbricks_flats": {
+    "dataset_name": "delhi_magicbricks_flats",
+    "filepath": "data\\raw\\delhi_magicbricks_flats.csv",
+    "rows": 1259,
+    "cols": 11,
+    "memory_mb": 0.514,
+    "exact_duplicates": 83,
+    "null_counts": {
+      "Area": 0,
+      "BHK": 0,
+      "Bathroom": 2,
+      "Furnishing": 5,
+      "Locality": 0,
+      "Parking": 33,
+      "Price": 0,
+      "Status": 0,
+      "Transaction": 0,
+      "Type": 5,
+      "Per_Sqft": 241
+    },
+    "null_percentages": {
+      "Area": 0.0,
+      "BHK": 0.0,
+      "Bathroom": 0.16,
+      "Furnishing": 0.4,
+      "Locality": 0.0,
+      "Parking": 2.62,
+      "Price": 0.0,
+      "Status": 0.0,
+      "Transaction": 0.0,
+      "Type": 0.4,
+      "Per_Sqft": 19.14
+    },
+    "numeric_profile": {
+      "Area": {
+        "count": 1259,
+        "mean": 1466.45,
+        "std": 1568.06,
+        "min": 28.0,
+        "p25": 800.0,
+        "median": 1200.0,
+        "p75": 1700.0,
+        "max": 24300.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "BHK": {
+        "count": 1259,
+        "mean": 2.8,
+        "std": 0.95,
+        "min": 1.0,
+        "p25": 2.0,
+        "median": 3.0,
+        "p75": 3.0,
+        "max": 10.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Bathroom": {
+        "count": 1257,
+        "mean": 2.56,
+        "std": 1.04,
+        "min": 1.0,
+        "p25": 2.0,
+        "median": 2.0,
+        "p75": 3.0,
+        "max": 7.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Parking": {
+        "count": 1226,
+        "mean": 1.94,
+        "std": 6.28,
+        "min": 1.0,
+        "p25": 1.0,
+        "median": 1.0,
+        "p75": 2.0,
+        "max": 114.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Price": {
+        "count": 1259,
+        "mean": 21306703.73,
+        "std": 25601154.53,
+        "min": 1000000.0,
+        "p25": 5700000.0,
+        "median": 14200000.0,
+        "p75": 25500000.0,
+        "max": 240000000.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      },
+      "Per_Sqft": {
+        "count": 1018,
+        "mean": 15690.14,
+        "std": 21134.74,
+        "min": 1259.0,
+        "p25": 6364.0,
+        "median": 11291.5,
+        "p75": 18000.0,
+        "max": 183333.0,
+        "zeros_count": 0,
+        "negatives_count": 0
+      }
+    },
+    "categorical_profile": {
+      "Furnishing": {
+        "unique_count": 3,
+        "top_10_values": {
+          "Semi-Furnished": 708,
+          "Unfurnished": 363,
+          "Furnished": 183
+        },
+        "sample_values": [
+          "Semi-Furnished",
+          "Furnished",
+          "Unfurnished"
+        ]
+      },
+      "Locality": {
+        "unique_count": 365,
+        "top_10_values": {
+          "Lajpat Nagar 3": 34,
+          "Lajpat Nagar 2": 33,
+          "J R Designers Floors, Rohini Sector 24": 31,
+          "Kailash Colony, Greater Kailash": 30,
+          "Yamuna Vihar, Shahdara": 29,
+          "Laxmi Nagar": 25,
+          "Mehrauli": 24,
+          "Chittaranjan Park": 24,
+          "Saket": 21,
+          "Alaknanda": 20
+        },
+        "sample_values": [
+          "Rohini Sector 25",
+          "J R Designers Floors, Rohini Sector 24",
+          "Citizen Apartment, Rohini Sector 13",
+          "Rohini Sector 24",
+          "Rohini Sector 24 carpet area 650 sqft status Ready to Move floor 4 out of 4 floors transaction New Property furnishing Semi-Furnished facing East overlooking Garden/Park, Main Road car parking 1 Open bathroom 2 balcony 1 ownership Freehold Newly Constructed Property Newly Constructed Property East Facing Property 2BHK Newly build property for Sale. A House is waiting for a Friendly Family to make it a lovely home.So please come and make his house feel alive once again. read more Contact Agent View Phone No. Share Feedback Garima properties Certified Agent Trusted by Users Genuine Listings Market Knowledge"
+        ]
+      },
+      "Status": {
+        "unique_count": 2,
+        "top_10_values": {
+          "Ready_to_move": 1184,
+          "Almost_ready": 75
+        },
+        "sample_values": [
+          "Ready_to_move",
+          "Almost_ready"
+        ]
+      },
+      "Transaction": {
+        "unique_count": 2,
+        "top_10_values": {
+          "Resale": 781,
+          "New_Property": 478
+        },
+        "sample_values": [
+          "New_Property",
+          "Resale"
+        ]
+      },
+      "Type": {
+        "unique_count": 2,
+        "top_10_values": {
+          "Builder_Floor": 661,
+          "Apartment": 593
+        },
+        "sample_values": [
+          "Builder_Floor",
+          "Apartment"
+        ]
+      }
+    },
+    "geographic_profile": {
+      "has_geo": true,
+      "locality_column": "Locality",
+      "unique_localities": 365,
+      "top_10_localities": {
+        "lajpat nagar 3": 34,
+        "lajpat nagar 2": 33,
+        "j r designers floors, rohini sector 24": 31,
+        "kailash colony, greater kailash": 30,
+        "yamuna vihar, shahdara": 29,
+        "laxmi nagar": 25,
+        "mehrauli": 24,
+        "chittaranjan park": 24,
+        "saket": 21,
+        "alaknanda": 20
+      }
+    },
+    "temporal_profile": {
+      "has_temporal": false
+    },
+    "leakage_notes": [
+      "DIRECT TARGET LEAKAGE: 'Per_Sqft' is mathematically derived as (Price / Area). It must be excluded from feature vectors in future modeling phases."
+    ],
+    "sample_rows": [
+      {
+        "Area": 800.0,
+        "BHK": 3,
+        "Bathroom": 2.0,
+        "Furnishing": "Semi-Furnished",
+        "Locality": "Rohini Sector 25",
+        "Parking": 1.0,
+        "Price": 6500000,
+        "Status": "Ready_to_move",
+        "Transaction": "New_Property",
+        "Type": "Builder_Floor",
+        "Per_Sqft": NaN
+      },
+      {
+        "Area": 750.0,
+        "BHK": 2,
+        "Bathroom": 2.0,
+        "Furnishing": "Semi-Furnished",
+        "Locality": "J R Designers Floors, Rohini Sector 24",
+        "Parking": 1.0,
+        "Price": 5000000,
+        "Status": "Ready_to_move",
+        "Transaction": "New_Property",
+        "Type": "Apartment",
+        "Per_Sqft": 6667.0
+      },
+      {
+        "Area": 950.0,
+        "BHK": 2,
+        "Bathroom": 2.0,
+        "Furnishing": "Furnished",
+        "Locality": "Citizen Apartment, Rohini Sector 13",
+        "Parking": 1.0,
+        "Price": 15500000,
+        "Status": "Ready_to_move",
+        "Transaction": "Resale",
+        "Type": "Apartment",
+        "Per_Sqft": 6667.0
+      }
+    ]
+  }
+}
