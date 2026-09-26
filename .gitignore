@@ -61,6 +61,11 @@ notebooks/data/house_prices.csv
 scratch_*.txt
 scratch_*/
 
+# Large Binary Model Weights (LLM GGUF)
+*.gguf
+data/models/
+backend/models/llm/
+
 # OS / IDE Files
 .DS_Store
 Thumbs.db

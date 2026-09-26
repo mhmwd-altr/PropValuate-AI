@@ -1,0 +1,482 @@
+{
+  "timestamp": "2026-09-26T07:47:02Z",
+  "hardware_environment": {
+    "os": "Windows 10 x64 (Build 10.0.19045)",
+    "cpu": "AMD Ryzen 5 3500U Mobile (4 physical cores, 8 threads, AVX2 enabled)",
+    "gpu": "AMD Radeon Vega 8 (Integrated, Shared memory)",
+    "total_physical_ram_gb": 13.91,
+    "avail_ram_before_gb": 6.64,
+    "used_ram_before_gb": 7.28,
+    "used_ram_after_gb": 7.41,
+    "ram_delta_gb": 0.13,
+    "peak_ram_during_bench_gb": 9.39,
+    "inference_framework": "llama-cpp-python 0.2.90 (Windows x64 AVX2)",
+    "inference_threads": 4,
+    "context_window": 2048
+  },
+  "model_metadata": {
+    "model_name": "Qwen2.5-3B-Instruct",
+    "quantization": "GGUF Q4_K_M",
+    "source": "Alibaba Cloud / HuggingFace (Qwen/Qwen2.5-3B-Instruct-GGUF)",
+    "exact_sha256": "626b4a6678b86442240e33df819e00132d3ba7dddfe1cdc4fbb18e0a9615c62d",
+    "file_size_bytes": 2104932768,
+    "file_size_gb": 1.96,
+    "license": "Apache 2.0"
+  },
+  "measured_benchmarks": {
+    "cold_load_time_sec": 0.851,
+    "warmup_latency_sec": 4.052,
+    "avg_generation_latency_sec": 25.89,
+    "avg_tokens_per_sec": 5.0,
+    "json_valid_rate_percent": 95.0,
+    "schema_valid_rate_percent": 95.0,
+    "complete_required_fields_rate_percent": 80.0,
+    "anti_hallucination_rate_percent": 95.0,
+    "invalid_output_count": 1,
+    "total_evaluation_runs": 20
+  },
+  "representative_tests_matrix": [
+    {
+      "test_id": "Test A — Simple property intent",
+      "prompt": "I want to estimate the price of a 1500 sqft 3 BHK apartment in Bangalore.",
+      "expected_behavior": "Intent VALUATION_REQUEST, tool predict_property_price, slots: area 1500, bhk 3, city bangalore.",
+      "latency_sec": 52.07,
+      "tokens_generated": 95,
+      "tok_per_sec": 1.8,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm if it's a resale property?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1500,\n    \"bhk\": 3,\n    \"city\": \"Bangalore\",\n    \"resale\": 0\n  },\n  \"missing_slots\": []\n}",
+      "parsed_output": {
+        "intent": "VALUATION_REQUEST",
+        "reply": "Sure, I can help with that. Could you please confirm if it's a resale property?",
+        "tool_call": "predict_property_price",
+        "slots": {
+          "area_sqft": 1500,
+          "bhk": 3,
+          "city": "Bangalore",
+          "resale": 0
+        },
+        "missing_slots": []
+      },
+      "pydantic_valid": true,
+      "pass": true
+    },
+    {
+      "test_id": "Test B — Indian terminology / Hinglish",
+      "prompt": "Mere paas Bangalore mein 1500 square feet ka 3 BHK flat hai. RERA registered hai aur resale property hai. Iski value kitni ho sakti hai?",
+      "expected_behavior": "Understand Hinglish terms (Bangalore, 1500 sqft, 3 BHK flat, RERA, resale) and request valuation tool.",
+      "latency_sec": 21.12,
+      "tokens_generated": 107,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm the RERA status and if it's under construction?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1500,\n    \"bhk\": 3,\n    \"city\": \"Bangalore\",\n    \"rera\": 1,\n    \"resale\": 1\n  },\n  \"missing_slots\": []\n}",
+      "parsed_output": {
+        "intent": "VALUATION_REQUEST",
+        "reply": "Sure, I can help with that. Could you please confirm the RERA status and if it's under construction?",
+        "tool_call": "predict_property_price",
+        "slots": {
+          "area_sqft": 1500,
+          "bhk": 3,
+          "city": "Bangalore",
+          "rera": 1,
+          "resale": 1
+        },
+        "missing_slots": []
+      },
+      "pydantic_valid": true,
+      "pass": true
+    },
+    {
+      "test_id": "Test C — Missing information",
+      "prompt": "I want to know the value of my apartment.",
+      "expected_behavior": "Clarify missing required details (area, BHK, city). Do NOT invent values.",
+      "latency_sec": 32.03,
+      "tokens_generated": 154,
+      "tok_per_sec": 4.8,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please provide me with the area (in square feet), number of bedrooms (BHK), and the city where your apartment is located?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"area_sqft\", \"bhk\", \"city\"]\n}",
+      "parsed_output": {
+        "intent": "VALUATION_REQUEST",
+        "reply": "Sure, I can help with that. Could you please provide me with the area (in square feet), number of bedrooms (BHK), and the city where your apartment is located?",
+        "tool_call": "predict_property_price",
+        "slots": {
+          "area_sqft": null,
+          "bhk": null,
+          "city": null,
+          "posted_by": null,
+          "rera": null,
+          "under_construction": null,
+          "ready_to_move": null,
+          "resale": null,
+          "is_rk": null
+        },
+        "missing_slots": [
+          "area_sqft",
+          "bhk",
+          "city"
+        ]
+      },
+      "pydantic_valid": true,
+      "pass": false
+    },
+    {
+      "test_id": "Test D — Unsupported location",
+      "prompt": "I have a 1500 sqft apartment in London. Estimate its price using your India model.",
+      "expected_behavior": "Reject or clarify unsupported international city (London). Do not execute valuation tool.",
+      "latency_sec": 28.69,
+      "tokens_generated": 125,
+      "tok_per_sec": 4.4,
+      "raw_output": "{\n  \"intent\": \"UNSUPPORTED_REQUEST\",\n  \"reply\": \"Sorry, but your query is not supported. We currently only handle property queries related to cities in India.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"city\"]\n}",
+      "parsed_output": {
+        "intent": "UNSUPPORTED_REQUEST",
+        "reply": "Sorry, but your query is not supported. We currently only handle property queries related to cities in India.",
+        "tool_call": null,
+        "slots": {
+          "area_sqft": null,
+          "bhk": null,
+          "city": null,
+          "posted_by": null,
+          "rera": null,
+          "under_construction": null,
+          "ready_to_move": null,
+          "resale": null,
+          "is_rk": null
+        },
+        "missing_slots": [
+          "city"
+        ]
+      },
+      "pydantic_valid": true,
+      "pass": true
+    },
+    {
+      "test_id": "Test E — Anti-hallucination valuation",
+      "prompt": "My 1500 sqft 3 BHK apartment in Bangalore is worth exactly ₹2 crore. Confirm the prediction.",
+      "expected_behavior": "Do NOT echo or invent ₹2 crore as model result. Delegate to deterministic valuation tool.",
+      "latency_sec": 30.58,
+      "tokens_generated": 141,
+      "tok_per_sec": 4.6,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Your property details have been understood. We will now use our prediction tool to estimate the value of your apartment.\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1500,\n    \"bhk\": 3,\n    \"city\": \"Bangalore\",\n    \"posted_by\": \"Owner\",\n    \"rera\": 0,\n    \"under_construction\": 0,\n    \"ready_to_move\": 1,\n    \"resale\": 0,\n    \"is_rk\": 0\n  },\n  \"missing_slots\": []\n}",
+      "parsed_output": {
+        "intent": "VALUATION_REQUEST",
+        "reply": "Your property details have been understood. We will now use our prediction tool to estimate the value of your apartment.",
+        "tool_call": "predict_property_price",
+        "slots": {
+          "area_sqft": 1500,
+          "bhk": 3,
+          "city": "Bangalore",
+          "posted_by": "Owner",
+          "rera": 0,
+          "under_construction": 0,
+          "ready_to_move": 1,
+          "resale": 0,
+          "is_rk": 0
+        },
+        "missing_slots": []
+      },
+      "pydantic_valid": true,
+      "pass": true
+    },
+    {
+      "test_id": "Test F — Structured extraction",
+      "prompt": "Extract JSON for: 1200 sq ft, 2 BHK, Mumbai, Owner, RERA approved, ready to move, resale, standard BHK.",
+      "expected_behavior": "Pure JSON with area_sqft=1200, bhk=2, city=mumbai, posted_by=Owner, rera=1, ready_to_move=1, resale=1, is_rk=0.",
+      "latency_sec": 27.75,
+      "tokens_generated": 134,
+      "tok_per_sec": 4.8,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"Could you please confirm if the property is under construction?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 1200.0,\n    \"bhk\": 2,\n    \"city\": \"Mumbai\",\n    \"posted_by\": \"Owner\",\n    \"rera\": 1,\n    \"under_construction\": 0,\n    \"ready_to_move\": 1,\n    \"resale\": 1,\n    \"is_rk\": 0\n  },\n  \"missing_slots\": [\"is_rk\"]\n}",
+      "parsed_output": {
+        "intent": "PROPERTY_INPUT_CLARIFICATION",
+        "reply": "Could you please confirm if the property is under construction?",
+        "tool_call": null,
+        "slots": {
+          "area_sqft": 1200.0,
+          "bhk": 2,
+          "city": "Mumbai",
+          "posted_by": "Owner",
+          "rera": 1,
+          "under_construction": 0,
+          "ready_to_move": 1,
+          "resale": 1,
+          "is_rk": 0
+        },
+        "missing_slots": [
+          "is_rk"
+        ]
+      },
+      "pydantic_valid": true,
+      "pass": false
+    },
+    {
+      "test_id": "Test G — Tool-call intent",
+      "prompt": "What is the estimated price of my 1500 sqft 3 BHK apartment in Bangalore?",
+      "expected_behavior": "Identify predict_property_price tool call without hallucinating numbers.",
+      "latency_sec": 32.93,
+      "tokens_generated": 166,
+      "tok_per_sec": 5.0,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm the RERA status, whether it's under construction, ready to move, or resale, and if it's a resale property?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1500,\n    \"bhk\": 3,\n    \"city\": \"Bangalore\",\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"rera\", \"under_construction\", \"ready_to_move\", \"resale\", \"is_rk\"]\n}",
+      "parsed_output": {
+        "intent": "VALUATION_REQUEST",
+        "reply": "Sure, I can help with that. Could you please confirm the RERA status, whether it's under construction, ready to move, or resale, and if it's a resale property?",
+        "tool_call": "predict_property_price",
+        "slots": {
+          "area_sqft": 1500,
+          "bhk": 3,
+          "city": "Bangalore",
+          "rera": null,
+          "under_construction": null,
+          "ready_to_move": null,
+          "resale": null,
+          "is_rk": null
+        },
+        "missing_slots": [
+          "rera",
+          "under_construction",
+          "ready_to_move",
+          "resale",
+          "is_rk"
+        ]
+      },
+      "pydantic_valid": true,
+      "pass": true
+    }
+  ],
+  "structured_evaluation_runs": [
+    {
+      "id": "TC-INT-01",
+      "category": "intent_recognition",
+      "prompt": "What is the estimated value of a 3 BHK flat in Bangalore with 1500 sqft area?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 19.92,
+      "tok_per_sec": 4.9,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm if it's a resale property?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1500.0,\n    \"bhk\": 3,\n    \"city\": \"Bangalore\",\n    \"resale\": 1\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-02",
+      "category": "intent_recognition",
+      "prompt": "I want to calculate the price of my 2 BHK apartment in Mumbai, 1200 sqft, owner listed, ready to move.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 28.28,
+      "tok_per_sec": 4.8,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm if the apartment is under construction?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1200.0,\n    \"bhk\": 2,\n    \"city\": \"Mumbai\",\n    \"posted_by\": \"Owner\",\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": 1,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-03",
+      "category": "intent_recognition",
+      "prompt": "Which cities in India do you support for property valuation?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 30.16,
+      "tok_per_sec": 4.8,
+      "raw_output": "{\n  \"intent\": \"SUPPORTED_LOCATION_QUERY\",\n  \"reply\": \"I support property valuation in the following cities in India: Bangalore, Chennai, Coimbatore, Delhi, Hyderabad, Jaipur, Kolkata, Lucknow, Mumbai, Pune, Surat, and Thane.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-04",
+      "category": "intent_recognition",
+      "prompt": "Is Pune covered in your valuation engine?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 11.27,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"SUPPORTED_LOCATION_QUERY\",\n  \"reply\": \"Pune is one of the supported cities in my valuation engine.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"city\": \"Pune\"\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-05",
+      "category": "intent_recognition",
+      "prompt": "Can you explain what RERA approval means and why it affects property valuation?",
+      "is_valid_json": false,
+      "is_schema_valid": false,
+      "is_complete": false,
+      "anti_hallucination_ok": true,
+      "latency_sec": 31.23,
+      "tok_per_sec": 5.8,
+      "raw_output": "{\n  \"intent\": \"VALUATION_EXPLANATION\",\n  \"reply\": \"RERA (Real Estate Regulatory Authority) approval is a regulatory framework in India that ensures transparency and accountability in the real estate sector. It mandates certain standards for the development, marketing, and sale of properties. Properties that have RERA approval are generally considered more reliable and have a higher resale value. Without RERA approval, properties might be perceived as less secure, which can affect their valuation negatively.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing"
+    },
+    {
+      "id": "TC-INT-06",
+      "category": "intent_recognition",
+      "prompt": "Why is the valuation for South Mumbai higher per sqft than Thane?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 28.33,
+      "tok_per_sec": 5.2,
+      "raw_output": "{\n  \"intent\": \"VALUATION_EXPLANATION\",\n  \"reply\": \"The valuation per square foot in South Mumbai is higher than in Thane due to factors such as better infrastructure, higher demand, and better amenities. These factors contribute to the higher prices in South Mumbai.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": \"South Mumbai\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-07",
+      "category": "intent_recognition",
+      "prompt": "Who is the prime minister of India?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 23.28,
+      "tok_per_sec": 5.2,
+      "raw_output": "{\n  \"intent\": \"UNSUPPORTED_REQUEST\",\n  \"reply\": \"I'm here to help with real estate queries. The current Prime Minister of India is Narendra Modi.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-INT-08",
+      "category": "intent_recognition",
+      "prompt": "Write a python script to scrape real estate data from 99acres.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 29.41,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"UNSUPPORTED_REQUEST\",\n  \"reply\": \"Sorry, but I can't assist with that. Scraping data is not a supported functionality for the current intents. Please ask a question related to property valuation, property input clarification, supported location query, valuation explanation, or general real estate question.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-SLOT-01",
+      "category": "slot_extraction",
+      "prompt": "I have an 1800 sq ft, 4 BHK flat in Gurgaon built by a dealer with RERA registration.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 31.09,
+      "tok_per_sec": 4.6,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Please provide the city, RERA status, and whether it's ready to move or under construction.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 1800,\n    \"bhk\": 4,\n    \"city\": \"Gurgaon\",\n    \"posted_by\": \"Dealer\",\n    \"rera\": 1,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"under_construction\", \"ready_to_move\"]\n}"
+    },
+    {
+      "id": "TC-SLOT-02",
+      "category": "slot_extraction",
+      "prompt": "1 BHK studio flat 450 sqft in Badlapur, under construction, new booking directly from builder.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 31.15,
+      "tok_per_sec": 4.2,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Please provide the city and RERA status of the property.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 450,\n    \"bhk\": 1,\n    \"city\": \"Badlapur\",\n    \"posted_by\": \"Builder\",\n    \"rera\": null,\n    \"under_construction\": 1,\n    \"ready_to_move\": 0,\n    \"resale\": 0,\n    \"is_rk\": 0\n  },\n  \"missing_slots\": [\"rera\"]\n}"
+    },
+    {
+      "id": "TC-SLOT-03",
+      "category": "slot_extraction",
+      "prompt": "RK studio apartment in Navi Mumbai, 320 sqft carpet area.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 31.39,
+      "tok_per_sec": 4.5,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"Could you please specify the number of bedrooms (BHK) and whether it's a ready-to-move or under-construction property?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 320,\n    \"bhk\": null,\n    \"city\": \"Navi Mumbai\",\n    \"posted_by\": \"RK studio\",\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": 1\n  },\n  \"missing_slots\": [\"bhk\"]\n}"
+    },
+    {
+      "id": "TC-SLOT-04",
+      "category": "slot_extraction",
+      "prompt": "3BHK apartment in Kolkata, 1350 square feet.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 19.38,
+      "tok_per_sec": 4.9,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please confirm if it's a resale property?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {\n    \"area_sqft\": 1350,\n    \"bhk\": 3,\n    \"city\": \"Kolkata\",\n    \"resale\": 0\n  },\n  \"missing_slots\": []\n}"
+    },
+    {
+      "id": "TC-SLOT-05",
+      "category": "slot_extraction",
+      "prompt": "Flat in New Delhi, 2 bedrooms, 950 sft.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 27.17,
+      "tok_per_sec": 4.9,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Please provide the floor number and the year of construction for a more accurate valuation.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 950,\n    \"bhk\": 2,\n    \"city\": \"New Delhi\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"floor_number\", \"year_of_construction\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-01",
+      "category": "multi_turn_clarification",
+      "prompt": "How much is my property worth?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": false,
+      "anti_hallucination_ok": true,
+      "latency_sec": 17.08,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"To provide you with an accurate valuation, I need some details about your property such as the area, number of bedrooms (BHK), and the city. Could you please provide these details?\",\n  \"tool_call\": \"predict_property_price\",\n  \"slots\": {},\n  \"missing_slots\": [\"area_sqft\", \"bhk\", \"city\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-02",
+      "category": "multi_turn_clarification",
+      "prompt": "I have a flat in Hyderabad.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 20.81,
+      "tok_per_sec": 5.0,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"Could you please provide the area in square feet, number of bedrooms (BHK), and any other relevant details like the RERA status or if it's ready to move in?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": \"Hyderabad\"\n  },\n  \"missing_slots\": [\"area_sqft\", \"bhk\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-03",
+      "category": "multi_turn_clarification",
+      "prompt": "The area is 1600 sqft in Chennai.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 29.61,
+      "tok_per_sec": 4.7,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"Could you please provide the number of bedrooms (BHK) and whether it's a ready-to-move property?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 1600,\n    \"bhk\": null,\n    \"city\": \"Chennai\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"bhk\", \"ready_to_move\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-04",
+      "category": "multi_turn_clarification",
+      "prompt": "It is 1500 sqft with 3 BHK.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 24.51,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"Could you please specify the city this property is located in?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": 1500.0,\n    \"bhk\": 3,\n    \"city\": null,\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"city\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-05",
+      "category": "multi_turn_clarification",
+      "prompt": "Ahmedabad",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": true,
+      "anti_hallucination_ok": true,
+      "latency_sec": 25.73,
+      "tok_per_sec": 5.4,
+      "raw_output": "{\n  \"intent\": \"PROPERTY_INPUT_CLARIFICATION\",\n  \"reply\": \"You haven't provided the area, BHK, or any specific details about the property. Could you please provide these details?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": \"Ahmedabad\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"area_sqft\", \"bhk\"]\n}"
+    },
+    {
+      "id": "TC-CLAR-06",
+      "category": "multi_turn_clarification",
+      "prompt": "Actually, what if it was in Mumbai instead of Bangalore?",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": false,
+      "anti_hallucination_ok": true,
+      "latency_sec": 30.89,
+      "tok_per_sec": 5.3,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"Sure, I can help with that. Could you please provide the area, number of bedrooms (BHK), and any other relevant details such as the property type (Owner, Dealer, Builder) and if it's under construction or ready to move?\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": \"Mumbai\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"area_sqft\", \"bhk\"]\n}"
+    },
+    {
+      "id": "TC-EDGE-01",
+      "category": "edge_case_validation",
+      "prompt": "Estimate price for a 0 sqft flat in Bangalore.",
+      "is_valid_json": true,
+      "is_schema_valid": true,
+      "is_complete": false,
+      "anti_hallucination_ok": true,
+      "latency_sec": 27.07,
+      "tok_per_sec": 5.1,
+      "raw_output": "{\n  \"intent\": \"VALUATION_REQUEST\",\n  \"reply\": \"The area you have mentioned is 0 sqft, which is not a valid input for property valuation. Please provide a valid area in square feet.\",\n  \"tool_call\": null,\n  \"slots\": {\n    \"area_sqft\": null,\n    \"bhk\": null,\n    \"city\": \"Bangalore\",\n    \"posted_by\": null,\n    \"rera\": null,\n    \"under_construction\": null,\n    \"ready_to_move\": null,\n    \"resale\": null,\n    \"is_rk\": null\n  },\n  \"missing_slots\": [\"area_sqft\"]\n}"
+    }
+  ]
+}
