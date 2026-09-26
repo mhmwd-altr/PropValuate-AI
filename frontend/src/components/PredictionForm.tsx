@@ -154,11 +154,45 @@ export const PredictionForm: React.FC<PredictionFormProps> = ({
 
   const validateFormV2 = (): boolean => {
     const newErrors: Partial<Record<keyof PredictionRequestV2, string>> = {};
-    if (!formDataV2.area_sqft || formDataV2.area_sqft <= 0) newErrors.area_sqft = 'Carpet area must be greater than 0 sq ft.';
-    else if (formDataV2.area_sqft > 50000) newErrors.area_sqft = 'Carpet area cannot exceed 50,000 sq ft.';
-    if (!formDataV2.bhk || formDataV2.bhk < 1) newErrors.bhk = 'BHK must be at least 1.';
-    else if (formDataV2.bhk > 20) newErrors.bhk = 'BHK cannot exceed 20.';
-    if (!formDataV2.city || formDataV2.city.trim() === '') newErrors.city = 'Please select a city.';
+
+    // 1. area_sqft: > 0 and <= 50000
+    if (!formDataV2.area_sqft || isNaN(formDataV2.area_sqft) || formDataV2.area_sqft <= 0) {
+      newErrors.area_sqft = 'Carpet area must be greater than 0 sq ft.';
+    } else if (formDataV2.area_sqft > 50000) {
+      newErrors.area_sqft = 'Carpet area cannot exceed 50,000 sq ft.';
+    }
+
+    // 2. bhk: integer 1-20
+    if (!formDataV2.bhk || isNaN(formDataV2.bhk) || !Number.isInteger(Number(formDataV2.bhk)) || formDataV2.bhk < 1) {
+      newErrors.bhk = 'BHK must be an integer of at least 1.';
+    } else if (formDataV2.bhk > 20) {
+      newErrors.bhk = 'BHK cannot exceed 20.';
+    }
+
+    // 3. city & coordinates: required, in registry, lat 6-38, lon 68-98
+    if (!formDataV2.city || formDataV2.city.trim() === '') {
+      newErrors.city = 'Please select a valid city.';
+    } else {
+      const coord = getCityCoord(formDataV2.city);
+      if (!coord) {
+        newErrors.city = 'Selected city has no coordinate mapping in the 81-city registry.';
+      } else if (
+        !Number.isFinite(coord.lat) ||
+        !Number.isFinite(coord.lon) ||
+        coord.lat < 6.0 ||
+        coord.lat > 38.0 ||
+        coord.lon < 68.0 ||
+        coord.lon > 98.0
+      ) {
+        newErrors.city = 'City coordinates are outside supported Indian geographical bounds (Lat: 6–38, Lon: 68–98).';
+      }
+    }
+
+    // 4. posted_by: Owner | Dealer | Builder
+    if (!formDataV2.posted_by || !['Owner', 'Dealer', 'Builder'].includes(formDataV2.posted_by)) {
+      newErrors.posted_by = 'Posted by must be Owner, Dealer, or Builder.';
+    }
+
     setErrorsV2(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -175,9 +209,10 @@ export const PredictionForm: React.FC<PredictionFormProps> = ({
     const city = e.target.value;
     const coord = getCityCoord(city);
     setFormDataV2((prev) => ({
-      ...prev, city,
-      latitude: coord?.lat ?? prev.latitude,
-      longitude: coord?.lon ?? prev.longitude,
+      ...prev,
+      city,
+      latitude: coord ? coord.lat : NaN,
+      longitude: coord ? coord.lon : NaN,
     }));
     if (errorsV2.city) setErrorsV2((prev) => ({ ...prev, city: undefined }));
     if (apiError) setApiError(null);
@@ -192,29 +227,74 @@ export const PredictionForm: React.FC<PredictionFormProps> = ({
   };
 
   const handleSubmitV2 = async (e: React.FormEvent) => {
-    e.preventDefault(); setApiError(null);
+    e.preventDefault();
+    setApiError(null);
     if (!validateFormV2()) return;
+
+    const coord = getCityCoord(formDataV2.city);
+    if (!coord) {
+      setErrorsV2((prev) => ({
+        ...prev,
+        city: 'Selected city has no coordinate mapping in the 81-city registry.',
+      }));
+      return;
+    }
+
+    // Build strict payload with exact raw fields
+    const payload: PredictionRequestV2 = {
+      area_sqft: Number(formDataV2.area_sqft),
+      bhk: Math.floor(Number(formDataV2.bhk)),
+      latitude: coord.lat,
+      longitude: coord.lon,
+      city: formDataV2.city.toLowerCase().trim(),
+      posted_by: formDataV2.posted_by,
+      rera: formDataV2.rera === 1 ? 1 : 0,
+      under_construction: formDataV2.under_construction === 1 ? 1 : 0,
+      ready_to_move: formDataV2.ready_to_move === 1 ? 1 : 0,
+      resale: formDataV2.resale === 1 ? 1 : 0,
+      is_rk: formDataV2.is_rk === 1 ? 1 : 0,
+    };
+
     try {
       setIsSubmitting(true);
-      const v2Response = await predictionClient.predictV2(formDataV2);
+      const v2Response = await predictionClient.predictV2(payload);
       const compatInputs: PredictionRequest = {
-        area_sqft: formDataV2.area_sqft, bhk: formDataV2.bhk,
-        bathroom: 2, balcony: 0, floor_num: 0, total_floors: 1,
-        location: formDataV2.city, Furnishing: 'N/A',
-        Transaction: formDataV2.resale ? 'Resale' : 'New Property',
-        facing: 'N/A', Ownership: 'N/A',
+        area_sqft: payload.area_sqft,
+        bhk: payload.bhk,
+        bathroom: 2,
+        balcony: 0,
+        floor_num: 0,
+        total_floors: 1,
+        location: payload.city,
+        Furnishing: 'N/A',
+        Transaction: payload.resale ? 'Resale' : 'New Property',
+        facing: 'N/A',
+        Ownership: 'N/A',
       };
       const compatResult = {
         predicted_price: v2Response.predicted_price,
         predicted_price_lakhs: v2Response.predicted_price_lakhs,
-        currency: v2Response.currency, status: v2Response.status,
+        currency: v2Response.currency,
+        status: v2Response.status,
       };
       navigate('/result', {
-        state: { inputs: compatInputs, result: compatResult, timestamp: new Date().toISOString(), inputsV2: formDataV2, resultV2: v2Response },
+        state: {
+          inputs: compatInputs,
+          result: compatResult,
+          timestamp: new Date().toISOString(),
+          inputsV2: payload,
+          resultV2: v2Response,
+        },
       });
     } catch (err: unknown) {
-      setApiError(err instanceof Error ? err.message : 'Unable to generate V2 valuation. Please verify inputs and try again.');
-    } finally { setIsSubmitting(false); }
+      setApiError(
+        err instanceof Error
+          ? err.message
+          : 'Unable to generate V2 valuation. Please verify inputs and try again.'
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const locationOptions: SelectOption[] = locations.map((loc) => ({ value: loc, label: formatLocation(loc) }));
@@ -322,7 +402,9 @@ export const PredictionForm: React.FC<PredictionFormProps> = ({
           <MapPin className='w-3.5 h-3.5 text-indigo-500 shrink-0' />
           <span className='text-xs text-indigo-700'>
             <span className='font-semibold'>Geolocation:</span>{' '}
-            {formDataV2.latitude.toFixed(4)}&deg;N, {formDataV2.longitude.toFixed(4)}&deg;E
+            {Number.isFinite(formDataV2.latitude) && Number.isFinite(formDataV2.longitude)
+              ? `${formDataV2.latitude.toFixed(4)}°N, ${formDataV2.longitude.toFixed(4)}°E`
+              : 'Unresolved coordinate'}
             <span className='text-indigo-500 ml-1'>(auto-resolved from city centre)</span>
           </span>
         </div>
