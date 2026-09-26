@@ -17,7 +17,12 @@ class Settings(BaseModel):
     
     # Artifact paths
     MODEL_PATH: Path = BASE_DIR / "models" / "house_price.pkl"
+    MODEL_V2_PATH: Path = BASE_DIR / "models" / "house_price_v2.pkl"
     LOCATIONS_PATH: Path = BASE_DIR / "models" / "locations.json"
+    
+    # Model Versions
+    BASELINE_VERSION: str = "1.0.0"
+    V2_VERSION: str = "2.0.0"
     
     # CORS Configuration
     CORS_ORIGINS: List[str] = [

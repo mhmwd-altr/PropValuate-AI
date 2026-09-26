@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .core.config import settings
 from .services.model_service import model_service
+from .services.model_service_v2 import model_service_v2
 from .services.location_service import location_service
 from .api import api_router
 from .utils.errors import (
@@ -27,11 +28,12 @@ logger = logging.getLogger("backend.app")
 async def lifespan(app: FastAPI):
     """
     Manages application startup and shutdown lifecycle.
-    Loads the ML model and locations metadata once on startup.
+    Loads baseline ML model, V2 candidate model, and locations metadata once on startup.
     """
-    logger.info("Starting House Price Prediction Backend...")
+    logger.info("Starting PropValuate AI Backend...")
     try:
         model_service.load()
+        model_service_v2.load()
         location_service.load()
         logger.info("All model artifacts and location data loaded successfully.")
     except Exception as e:
@@ -39,7 +41,7 @@ async def lifespan(app: FastAPI):
     
     yield
     
-    logger.info("House Price Prediction Backend shutting down.")
+    logger.info("PropValuate AI Backend shutting down.")
 
 # Initialize FastAPI application
 app = FastAPI(
@@ -81,6 +83,7 @@ async def root():
         "endpoints": {
             "health": "/health",
             "locations": "/locations",
-            "predict": "/predict"
+            "predict": "/predict",
+            "predict_v2": "/api/v2/predict"
         }
     }

@@ -138,7 +138,12 @@ class HealthResponse(BaseModel):
     )
     model_loaded: bool = Field(
         ...,
-        description="True if the ML model pipeline is loaded and ready for inference",
+        description="True if the ML baseline model pipeline is loaded and ready for inference",
+        examples=[True]
+    )
+    v2_model_loaded: bool = Field(
+        default=False,
+        description="True if the Valuation Engine V2 candidate model is loaded",
         examples=[True]
     )
     locations_loaded: bool = Field(
