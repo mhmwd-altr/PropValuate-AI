@@ -28,11 +28,14 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        <div className="flex items-center space-x-3 sm:space-x-4">
-          <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-50 text-xs text-emerald-700 font-medium border border-emerald-200/60">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span>Valuation Engine Online</span>
-          </div>
+        <div className="flex items-center space-x-2 sm:space-x-3">
+          <Link
+            to="/assistant"
+            className="inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-brand-700 bg-brand-50 hover:bg-brand-100 border border-brand-200/80 transition-colors px-3.5 py-2 rounded-xl active:scale-98"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-brand-600" />
+            <span>AI Assistant</span>
+          </Link>
           <Link
             to="/"
             className="text-xs sm:text-sm font-semibold text-slate-700 hover:text-brand-600 transition-colors px-3.5 py-2 rounded-xl hover:bg-slate-100/80 active:scale-98"

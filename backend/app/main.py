@@ -6,6 +6,7 @@ from .core.config import settings
 from .services.model_service import model_service
 from .services.model_service_v2 import model_service_v2
 from .services.location_service import location_service
+from .services.language_providers import get_language_provider
 from .api import api_router
 from .utils.errors import (
     ModelNotLoadedError,
@@ -35,7 +36,8 @@ async def lifespan(app: FastAPI):
         model_service.load()
         model_service_v2.load()
         location_service.load()
-        logger.info("All model artifacts and location data loaded successfully.")
+        get_language_provider().load()
+        logger.info("All model artifacts, location data, and Language AI provider loaded successfully.")
     except Exception as e:
         logger.error(f"Critical error during startup artifact loading: {str(e)}")
     
@@ -84,6 +86,7 @@ async def root():
             "health": "/health",
             "locations": "/locations",
             "predict": "/predict",
-            "predict_v2": "/api/v2/predict"
+            "predict_v2": "/api/v2/predict",
+            "assistant": "/api/v2/assistant"
         }
     }

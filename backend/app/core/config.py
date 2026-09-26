@@ -35,4 +35,17 @@ class Settings(BaseModel):
     CORS_ALLOW_METHODS: List[str] = ["*"]
     CORS_ALLOW_HEADERS: List[str] = ["*"]
 
+    # Language AI & LLM Provider Configuration
+    LLM_MODEL_PATH: Path = BASE_DIR.parent / "data" / "models" / "qwen2.5-3b-instruct-q4_k_m.gguf"
+    LLM_PROVIDER_TYPE: str = os.getenv("LLM_PROVIDER_TYPE", "local")  # "local" or "mock"
+    LLM_CONTEXT_WINDOW: int = int(os.getenv("LLM_CONTEXT_WINDOW", "2048"))
+    LLM_THREADS: int = int(os.getenv("LLM_THREADS", "4"))
+    LLM_MAX_TOKENS: int = int(os.getenv("LLM_MAX_TOKENS", "180"))
+    LLM_TEMPERATURE: float = float(os.getenv("LLM_TEMPERATURE", "0.1"))
+    
+    # Assistant Session Limits
+    SESSION_TTL_MINUTES: int = int(os.getenv("SESSION_TTL_MINUTES", "30"))
+    SESSION_MAX_MESSAGES: int = int(os.getenv("SESSION_MAX_MESSAGES", "10"))
+    MAX_USER_MESSAGE_LENGTH: int = int(os.getenv("MAX_USER_MESSAGE_LENGTH", "1000"))
+
 settings = Settings()
